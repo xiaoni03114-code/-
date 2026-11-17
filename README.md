@@ -1,43 +1,37 @@
-# Sherlock 运行入口
+# Sherlock setup files
 
-这个仓库用于承载 Sherlock 的运行脚本与使用说明。脚本会自动克隆上游项目并准备 Python 虚拟环境。
+This repository contains setup scripts for installing the published Sherlock CLI in an isolated Python virtual environment. The scripts install the software and show its help text only; they do **not** search for usernames automatically.
 
-## 一键启动
-
-```bash
-chmod +x run_sherlock.sh
-./run_sherlock.sh
-```
-
-脚本会执行：
-
-- 克隆 `https://github.com/sherlock-project/sherlock.git`
-- 创建 Python 虚拟环境
-- 安装依赖
-- 打印 `sherlock --help`
-
-## 手动运行
+## Linux / macOS
 
 ```bash
-git clone https://github.com/sherlock-project/sherlock.git
-cd sherlock
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python sherlock --help
+chmod +x setup_sherlock.sh
+./setup_sherlock.sh
 ```
 
-## 示例
+The script requires Python 3.10 or later. Sherlock is installed into the repository's `.venv/` directory, which is intentionally local and should not be committed.
+
+## Windows PowerShell
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\setup_sherlock.ps1
+```
+
+## Verify installation
+
+Linux/macOS:
 
 ```bash
-python sherlock alice
-python sherlock alice bob
-python sherlock --site all alice
+.venv/bin/sherlock --help
 ```
 
-更多参数请查看：
+Windows:
 
-```bash
-python sherlock --help
+```powershell
+.\.venv\Scripts\sherlock.exe --help
 ```
+
+For your own account or an account you are explicitly authorized to assess, consult the official upstream usage documentation and choose the options yourself. Sherlock checks public username availability across social platforms; results can be incomplete or incorrect. Do not use it to profile, monitor, or target people without their permission.
+
+Upstream project: <https://github.com/sherlock-project/sherlock>
